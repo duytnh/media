@@ -29,7 +29,6 @@ const Personal = () => {
                 const response = await axios.get('https://hdbasicpro.000webhostapp.com/newmedia/api/getImagePostByUser.php',
                     {
                         headers: {
-                            'Authorization': `Bearer ${token}`,
                             'Content-Type': 'application/json'
                         },
                     }
