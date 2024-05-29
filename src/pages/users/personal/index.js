@@ -24,6 +24,7 @@ const Personal = () => {
     }, [navigate, user]);
 
     useEffect(() => {
+        console.log("token: ", token);
         const fetchPosts = async () => {
             try {
                 const response = await axios.get('https://hdbasicpro.000webhostapp.com/newmedia/api/getImagePostByUser.php',
