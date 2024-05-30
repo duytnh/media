@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 
 function IconComment({ avatar, name, created, content, user_id }) {
     const user = useSelector(state => state.auth.user);
-    const baseUrl = 'https://hdbasicpro.000webhotapp.com/newmedia';
-    const absolutePath = new URL(avatar, baseUrl).href;
+    const image_cmt = avatar.replace('../', 'https://hdbasicpro.000webhotapp.com/newmedia/');
 
     const handleDeleteComment = () => {
         if (user.user_id === user_id) {
@@ -16,7 +15,7 @@ function IconComment({ avatar, name, created, content, user_id }) {
     return (
         <div className='icon-comment'>
             <div className='info-comment'>
-                <img src={absolutePath} alt='Ảnh user comment' />
+                <img src={image_cmt} alt='Ảnh user comment' />
                 <div className='auth-comment'>
                     <h6>{name}</h6>
                     <p>{created}</p>

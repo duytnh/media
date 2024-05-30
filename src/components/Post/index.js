@@ -6,8 +6,7 @@ function Post({ user_avatar, user_fullname, created_at, description, images, tot
     const [imageClass, setImageClass] = useState('');
     const [openComment, setOpenComment] = useState(false);
     const [like, setLike] = useState(false);
-    const baseUrl = 'https://hdbasicpro.000webhotapp.com/newmedia';
-    const image_auth = new URL(user_avatar, baseUrl).href;
+    const image_auth = user_avatar.replace('../', 'https://hdbasicpro.000webhotapp.com/newmedia/');
 
     const handleOpenComment = () => {
         openComment ? setOpenComment(false) : setOpenComment(true);
