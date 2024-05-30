@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 function IconComment({ avatar, name, created, content, user_id }) {
     const user = useSelector(state => state.auth.user);
-    const image_cmt = avatar.replace('../', 'https://hdbasicpro.000webhotapp.com/newmedia/');
+    const image_cmt = avatar.replace('../', 'https://hdbasicpro.000webhostapp.com/newmedia/');
 
     const handleDeleteComment = () => {
         if (user.user_id === user_id) {

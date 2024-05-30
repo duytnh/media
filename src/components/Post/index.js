@@ -6,7 +6,7 @@ function Post({ user_avatar, user_fullname, created_at, description, images, tot
     const [imageClass, setImageClass] = useState('');
     const [openComment, setOpenComment] = useState(false);
     const [like, setLike] = useState(false);
-    const image_auth = user_avatar.replace('../', 'https://hdbasicpro.000webhotapp.com/newmedia/');
+    const image_auth = user_avatar.replace('../', 'https://hdbasicpro.000webhostapp.com/newmedia/');
 
     const handleOpenComment = () => {
         openComment ? setOpenComment(false) : setOpenComment(true);
@@ -48,7 +48,7 @@ function Post({ user_avatar, user_fullname, created_at, description, images, tot
             <div className='post-content'>
                 <div className={`post-images ${imageClass}`}>
                     {images.map((src, index) => {
-                        const image_content = new URL(src, baseUrl).href;
+                        const image_content = src.replace('../', 'https://hdbasicpro.000webhostapp.com/newmedia/');
                         return (
                             <img key={index} src={image_content} alt={`Image ${index + 1}`} />
                         );
