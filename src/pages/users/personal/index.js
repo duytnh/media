@@ -16,6 +16,13 @@ const Personal = () => {
     const [allPost, setAllPost] = useState([]);
     const alert = useAlert();
 
+    const instance = axios.create({
+        baseURL: 'https://hdbasicpro.000webhostapp.com',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    });
+
     useEffect(() => {
         if (user == null) {
             navigate('/login');
@@ -27,14 +34,7 @@ const Personal = () => {
         console.log("token: ", token);
         const fetchPosts = async () => {
             try {
-                const response = await axios.get('https://hdbasicpro.000webhostapp.com/newmedia/api/getImagePostByUser.php',
-                    {
-                        headers: {
-                            'Authorization': token,
-                            'Content-Type': 'application/json'
-                        },
-                    }
-                );
+                const response = await instance.get('/newmedia/api/getImagePostByUser.php');
                 if (response.data.status === 200) {
                     setAllPost(response.data.data);
                 } else if (response.data.status === 400) {
