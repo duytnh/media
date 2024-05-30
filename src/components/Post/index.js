@@ -7,6 +7,7 @@ function Post({ user_avatar, user_fullname, created_at, description, images, tot
     const [openComment, setOpenComment] = useState(false);
     const [like, setLike] = useState(false);
     const baseUrl = 'https://hdbasicpro.000webhotapp.com/newmedia';
+    const image_auth = new URL(user_avatar, baseUrl).href;
 
     const handleOpenComment = () => {
         openComment ? setOpenComment(false) : setOpenComment(true);
@@ -38,7 +39,7 @@ function Post({ user_avatar, user_fullname, created_at, description, images, tot
     return (
         <div className='post'>
             <div className='post-header'>
-                <img src={user_avatar} alt="Avatar" />
+                <img src={image_auth} alt="Avatar" />
                 <div className='info-post'>
                     <h6>{user_fullname}</h6>
                     <p>{created_at}</p>
@@ -48,9 +49,9 @@ function Post({ user_avatar, user_fullname, created_at, description, images, tot
             <div className='post-content'>
                 <div className={`post-images ${imageClass}`}>
                     {images.map((src, index) => {
-                        const absolutePath = new URL(src, baseUrl).href;
+                        const image_content = new URL(src, baseUrl).href;
                         return (
-                            <img key={index} src={absolutePath} alt={`Image ${index + 1}`} />
+                            <img key={index} src={image_content} alt={`Image ${index + 1}`} />
                         );
                     })}
 
