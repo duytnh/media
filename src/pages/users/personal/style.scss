@@ -78,3 +78,30 @@
     align-items: center;
     column-gap: 40px;
 }
+
+@media only screen and (max-width: 480px) {
+    .lists {
+        column-gap: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 50px;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
+    .lists {
+        column-gap: 10px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 200px;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .lists {
+        column-gap: 40px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 500px;
+    }
+}

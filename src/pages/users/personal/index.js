@@ -87,14 +87,13 @@ const Personal = () => {
             <div className='post-list'>
                 <h4>Bài viết</h4>
                 {allPost.map((post, index) => {
-                    const img_post = post.user_avatar.replace('../', 'https://hdbasicpro.000webhotapp.com/newmedia/');
                     return (
                         <Post
                             key={index}
-                            user_avatar={img_post}
+                            user_avatar={post.user_avatar}
                             user_fullname={post.user_fullname}
                             created_at={post.created_at}
-                            description={post.description}
+                            description={post.descriptions}
                             images={post.images}
                             total_likes={post.total_likes}
                             total_comments={post.total_comments}
