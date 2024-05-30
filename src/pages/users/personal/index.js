@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import UploadPost from '../../../components/UploadPost';
 import { useAlert } from 'react-alert';
 import axios from 'axios';
+import https from 'https'
 
 const Personal = () => {
     const user = useSelector(state => state.auth.user);
@@ -16,11 +17,18 @@ const Personal = () => {
     const [allPost, setAllPost] = useState([]);
     const alert = useAlert();
 
+    const agent = new https.Agent({
+        keepAlive: true,
+    });
+
     const instance = axios.create({
         baseURL: 'https://hdbasicpro.000webhostapp.com',
         headers: {
             'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
         },
+
+        httpsAgent: agent
     });
 
     useEffect(() => {
