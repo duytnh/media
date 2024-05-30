@@ -16,6 +16,10 @@ const Personal = () => {
     const [allPost, setAllPost] = useState([]);
     const alert = useAlert();
 
+    const postData = {
+        access_token: `Bearer ${token}`
+    };
+
     useEffect(() => {
         if (user == null) {
             navigate('/login');
@@ -26,10 +30,7 @@ const Personal = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.post('https://hdbasicpro.000webhostapp.com/newmedia/api/getImagePostByUser.php',
-                    {
-                        Authorization: `Bearer ${token}`
-                    },
+                const response = await axios.post('https://hdbasicpro.000webhostapp.com/newmedia/api/getImagePostByUser.php', postData,
                     {
                         headers: {
                             'Content-Type': 'application/json'
