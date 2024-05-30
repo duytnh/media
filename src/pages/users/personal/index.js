@@ -11,6 +11,7 @@ import axios from 'axios';
 const Personal = () => {
     const user = useSelector(state => state.auth.user);
     const token = user && user.jwt;
+    const baseUrl = 'https://hdbasicpro.000webhotapp.com/newmedia';
 
     const navigate = useNavigate();
     const [allPost, setAllPost] = useState([]);
@@ -86,19 +87,23 @@ const Personal = () => {
             <hr />
             <div className='post-list'>
                 <h4>Bài viết</h4>
-                {allPost.map((post, index) => (
-                    <Post
-                        key={index}
-                        user_avatar={post.user_avatar}
-                        user_fullname={post.user_fullname}
-                        created_at={post.created_at}
-                        description={post.description}
-                        images={post.images}
-                        total_likes={post.total_likes}
-                        total_comments={post.total_comments}
-                        comments={post.comments}
-                    />
-                ))}
+                {allPost.map((post, index) => {
+                    const absolutePath = new URL(post.user_avatar, baseUrl).href;
+                    return (
+                        <Post
+                            key={index}
+                            user_avatar={absolutePath} // Sử dụng đường dẫn tuyệt đối ở đây
+                            user_fullname={post.user_fullname}
+                            created_at={post.created_at}
+                            description={post.description}
+                            images={post.images}
+                            total_likes={post.total_likes}
+                            total_comments={post.total_comments}
+                            comments={post.comments}
+                        />
+                    );
+                })}
+
             </div>
         </div>
     )
