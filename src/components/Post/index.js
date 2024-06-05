@@ -239,7 +239,7 @@ function Post({ user_avatar, user_fullname, created_at, description, images, tot
                             fullname={Number(cmt.user_id) === userId ? 'Bạn' : cmt.fullname}
                             created_at={cmt.created_at}
                             comment={cmt.comment}
-                            id_user_comment={cmt.user_id}
+                            id_user_comment={Number(cmt.user_id)}
                             deleteComment={deleteCommentImage}
                         >
                         </Comment>
