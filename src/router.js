@@ -13,6 +13,8 @@ import Register from "./pages/admin/register";
 import Analytics from "./pages/admin/annalytics";
 import Upload from "./pages/admin/upload";
 import ChangePassword from "./pages/users/resetpassword";
+import DetailsUser from "./pages/users/detailsUser";
+import Notify from "./pages/users/notify";
 
 const RenderUserRouter = () => {
     const userRouters = [
@@ -35,6 +37,14 @@ const RenderUserRouter = () => {
         {
             path: ROUTERS.USER.RESET,
             component: <ChangePassword />
+        },
+        {
+            path: ROUTERS.USER.DETAILS_USER + "/:id",
+            component: <DetailsUser />
+        },
+        {
+            path: ROUTERS.USER.NOTIFY,
+            component: <Notify />
         }
     ];
 

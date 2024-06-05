@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './style.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginSuccess, loginFailure } from '../../../redux/authAction';
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from 'react-alert'
@@ -11,6 +11,9 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [registerUserName, setRegisterUserName] = useState('');
+    const [registerEmail, setRegisterEmail] = useState('');
+    const [registerPassword, setRegisterPassword] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const alert = useAlert()
@@ -154,6 +157,33 @@ const Login = () => {
         }
     }
 
+    const handleRegister = async () => {
+        try {
+            const response = await axios.post('https://hdbasicpro.000webhostapp.com/newmedia/api/register.php', {
+                username: registerUserName,
+                password: registerPassword,
+                email: registerEmail
+            }, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+
+            if (response.data.status === 200) {
+                alert.success(response.data.message);
+                setRegisterEmail('');
+                setRegisterPassword('');
+                setRegisterUserName('');
+            } else if (response.data.status === 400) {
+                alert.error(response.data.message);
+            }
+
+        } catch (error) {
+            alert.error('Không nhận được phản hồi từ máy chủ. Vui lòng kiểm tra lại kết nối.');
+            console.log('Lỗi yêu cầu:', error.request);
+        }
+    }
+
     return (
         <div className='login'>
             <div className="container">
@@ -218,20 +248,20 @@ const Login = () => {
                         <form className="form">
                             <div className="f_row">
                                 <label>Username</label>
-                                <input type="text" className="input-field" required />
+                                <input type="text" className="input-field" required onChange={(e) => setRegisterUserName(e.target.value)} />
                                 <u></u>
                             </div>
                             <div className="f_row">
                                 <label>Email</label>
-                                <input type="email" className="input-field" required />
+                                <input type="email" className="input-field" required onChange={(e) => setRegisterEmail(e.target.value)} />
                                 <u></u>
                             </div>
                             <div className="f_row last">
                                 <label>Password</label>
-                                <input type="password" className="input-field" required />
+                                <input type="password" className="input-field" required onChange={(e) => setRegisterPassword(e.target.value)} />
                                 <u></u>
                             </div>
-                            <button className="btn-large">NEXT</button>
+                            <button className="btn-large" onClick={handleRegister}>NEXT</button>
                         </form>
                     </div>
                     <p className="regTag icon-add">

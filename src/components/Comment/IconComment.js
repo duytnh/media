@@ -2,15 +2,9 @@ import React from 'react';
 import './style.scss';
 import { useSelector } from 'react-redux';
 
-function IconComment({ avatar, name, created, content, user_id }) {
+function IconComment({ avatar, name, created, content, userid, handleDeleteComment }) {
     const user = useSelector(state => state.auth.user);
     const image_cmt = avatar.replace('../', 'https://hdbasicpro.000webhostapp.com/newmedia/');
-
-    const handleDeleteComment = () => {
-        if (user.user_id === user_id) {
-
-        }
-    }
 
     return (
         <div className='icon-comment'>
@@ -23,8 +17,8 @@ function IconComment({ avatar, name, created, content, user_id }) {
             </div>
             <div className='content-comment'>
                 <p>{content}</p>
-                {user && user.user_id === user_id && (
-                    <button onClick={handleDeleteComment}>
+                {user && user.user_id === Number(userid) && (
+                    <button onClick={() => handleDeleteComment(created)}>
                         <i className="fa-regular fa-trash-can"></i>
                     </button>
                 )}

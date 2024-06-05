@@ -1,11 +1,16 @@
-import React from 'react'
-import './style.scss'
+import React from 'react';
+import './style.scss';
+import { useNavigate } from 'react-router-dom';
 
-function IconFriend() {
+function IconFriend({ image, name, id }) {
+    const navigate = useNavigate();
+    const detailsUser = () => {
+        navigate(`/detailsUser/${id}`);
+    }
     return (
-        <div className='friends'>
-            <img src='./anh-nen.webp' alt='ảnh' />
-            <p>Name user</p>
+        <div className='friends' onClick={detailsUser}>
+            <img src={image} alt='ảnh' />
+            <p>{name}</p>
         </div>
     )
 }

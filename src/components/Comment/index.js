@@ -1,7 +1,7 @@
 import React from 'react'
 import IconComment from './IconComment'
 
-function Comment({ avatar_url, fullname, created_at, comment, id_user_comment }) {
+function Comment({ avatar_url, fullname, created_at, comment, id_user_comment, deleteComment }) {
     return (
         <div className='comments'>
             <div className='list-comment'>
@@ -10,7 +10,8 @@ function Comment({ avatar_url, fullname, created_at, comment, id_user_comment })
                     name={fullname}
                     created={created_at}
                     content={comment}
-                    user_id={id_user_comment}
+                    userid={id_user_comment}
+                    handleDeleteComment={deleteComment}
                 />
             </div>
         </div>

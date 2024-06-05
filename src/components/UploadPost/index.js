@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './style.scss';
 import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function UploadPost() {
     const [images, setImages] = useState([]);
@@ -10,6 +11,15 @@ function UploadPost() {
     const [previewImages, setPreviewImages] = useState([]);
     const alert = useAlert();
     const navigate = useNavigate();
+    const user = useSelector(state => state.auth.user);
+    const token = user && user.jwt;
+
+    useEffect(() => {
+        if (user == null) {
+            navigate('/login');
+            return;
+        }
+    }, [navigate, user]);
 
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
@@ -22,10 +32,6 @@ function UploadPost() {
         setPreviewImages(files.map(file => URL.createObjectURL(file)));
     };
 
-    const handleDescriptionChange = (e) => {
-        setDescription(e.target.value);
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -33,7 +39,8 @@ function UploadPost() {
         images.forEach((image, index) => {
             formData.append('images[]', image);
         });
-        formData.append('description', description);
+        formData.append('descriptions', description);
+        formData.append('token', token);
 
         try {
             const response = await axios.post('https://hdbasicpro.000webhostapp.com/newmedia/api/uploadImage.php', formData, {
@@ -44,10 +51,8 @@ function UploadPost() {
             if (response.data.status === 200) {
                 alert.success(response.data.message);
                 navigate('/');
-            } else if (response.data.status === 400) {
+            } else if (response.data.status === 400 || response.data.status === 500) {
                 alert.error(response.data.message);
-            } else {
-                console.log(response.data.message);
             }
         } catch (error) {
             console.log('Lỗi khi tải ảnh lên');
@@ -62,9 +67,9 @@ function UploadPost() {
                     type='text'
                     placeholder="Hôm nay bạn thế nào ?"
                     value={description}
-                    onChange={handleDescriptionChange}
+                    onChange={(e) => setDescription(e.target.value)}
                 />
-                <input type="file" accept="image/*" multiple onChange={handleImageChange} />
+                <input type="file" accept="image/*" multiple onChange={handleImageChange} required />
                 <div className={`preview-images layout-${previewImages.length}`}>
                     {previewImages.map((src, index) => (
                         <div key={index} className="preview-image">

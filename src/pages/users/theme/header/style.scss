@@ -2,6 +2,24 @@ body {
     padding-top: 100px;
 }
 
+@media only screen and (max-width: 480px) {
+    body {
+        padding-top: 100px;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
+    body {
+        padding-top: 100px;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    body {
+        padding-top: 115px;
+    }
+}
+
 .header {
     position: fixed;
     top: -5px;
@@ -21,28 +39,24 @@ body {
 .header-top {
     width: 100%;
     margin-bottom: 15px;
+    position: relative;
 
-    .search-form {
-        display: flex;
-        justify-content: center;
+    input {
+        padding-left: 5px;
         width: 100%;
-        height: fit-content;
-        box-shadow: none;
-
-        input {
-            padding-left: 5px;
-            width: 80%;
-            border: 1px solid #eee;
-            padding: 5px;
-            outline: none;
-        }
-
-        button {
-            border: none;
-            background-color: rgba(100, 148, 237, 0.377);
-            width: 40px;
-        }
+        border: 1px solid #eee;
+        padding: 5px;
+        outline: none;
+        position: relative;
     }
+
+    span {
+        position: absolute;
+        right: 10px;
+        top: 7px;
+        color: #a0a0a0;
+    }
+
 }
 
 .header-bottom {

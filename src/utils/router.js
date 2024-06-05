@@ -5,6 +5,8 @@ export const ROUTERS = {
         INFO: 'information',
         FRIENDS: 'friends',
         RESET: 'change-password',
+        DETAILS_USER: 'detailsUser',
+        NOTIFY: 'notify',
     },
     ADMIN: {
         LOGIN: 'login',
