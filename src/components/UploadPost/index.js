@@ -50,7 +50,9 @@ function UploadPost() {
             });
             if (response.data.status === 200) {
                 alert.success(response.data.message);
-                navigate('/');
+                window.location.reload();
+                setImages([]);
+                setPreviewImages([]);
             } else if (response.data.status === 400 || response.data.status === 500) {
                 alert.error(response.data.message);
             }

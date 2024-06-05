@@ -5,7 +5,7 @@ import { useAlert } from 'react-alert';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-function Post({ user_avatar, user_fullname, created_at, description, images, total_likes, total_comments, comments, image_ids }) {
+function Post({ user_avatar, user_fullname, created_at, description, images, total_likes, total_comments, comments, image_ids, userId_post, deletePost }) {
     const [imageClass, setImageClass] = useState('');
     const [openComment, setOpenComment] = useState(false);
     const [like, setLike] = useState(false);
@@ -141,6 +141,7 @@ function Post({ user_avatar, user_fullname, created_at, description, images, tot
         fetchProfile();
     }, [alert, token]);
 
+
     const handleAddComment = async (event) => {
         event.preventDefault();
         try {
@@ -196,6 +197,7 @@ function Post({ user_avatar, user_fullname, created_at, description, images, tot
                     <h6>{user_fullname}</h6>
                     <p>{created_at}</p>
                 </div>
+                {userId_post === userId && (<button onClick={() => deletePost(image_ids)}><i className="fa-solid fa-trash-can"></i></button>)}
             </div>
             <p className='description'>{description}</p>
             <div className='post-content'>
