@@ -17,7 +17,7 @@ function IconComment({ avatar, name, created, content, userid, handleDeleteComme
             </div>
             <div className='content-comment'>
                 <p>{content}</p>
-                {user && user.user_id === Number(userid) && (
+                {user && Number(user.user_id) === Number(userid) && (
                     <button onClick={() => handleDeleteComment(created)}>
                         <i className="fa-regular fa-trash-can"></i>
                     </button>
